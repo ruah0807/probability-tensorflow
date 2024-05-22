@@ -10,16 +10,17 @@ import pandas as pd
 data = pd.read_csv('gpascore.csv')
 
 
-# 데이터 전처리  
-#      : 혹시 비어있는 곳이 있다면 평균값을 넣거나, 지우거나 해야하기때문에 데이터 전처리가 필요함.
-# print(data.isnull().sum())
-
 data = data.dropna()    # dropna() : 빈칸 drop 함수
-# data.fillna(100)      # fillna(?) : 빈칸채워주는함수
 
-print(data['gpa'].min())    # min(): gpa 행의 최소값 확인 가능
-print(data['gre'].max())    # max() : gre 행의 최대값
-print(data['gre'].count())  # count() : 행의 갯수
+y_data = data['admit'].values
+
+x_data = []
+
+for i, rows in data.iterrows() :     # iterrow() : datafram(행)을 한줄씩 출력 가능 (ex) print(rows['gre'])
+    # .append() : x_data 안에 데이터를 집어넣어주는 함수
+    x_data.append([ rows['gre'], rows['gpa'], rows['rank'] ]) 
+
+print(x_data)
 exit()
 
 
